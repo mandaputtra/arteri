@@ -1,4 +1,4 @@
--- Ping Pong Pay schema. Two tables, no migrations framework: this file is the
+-- Arteri schema. Two tables, no migrations framework: this file is the
 -- whole schema and re-runs cleanly, so both local compose and Fly Postgres
 -- bootstrap from it directly.
 --

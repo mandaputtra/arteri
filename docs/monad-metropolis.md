@@ -38,7 +38,7 @@ Source for this section unless noted: https://monad.xyz/developers/hackathons/me
 - **Build window:** 1 Sep → 13 Oct 2026 (six weeks, online global; registration opened 1 Sep, build starts same day).
 - **Submission deadline:** 13 Oct. Judging 14–27 Oct. Winners announced 3 Nov.
 - **Prize pool:** $250,000+ total.
-- **Consumer Products & Payments track (ours):** $30,000 split evenly between 3 teams ($10k each). Best fit: "product teams who care more about a user's first five minutes than the architecture underneath." Judge-signal examples: a payments app that never mentions blockchain; subscriptions charging by the second; shared wallets/group spending settling without an intermediary. (ping-pong-pay hits example 1 and 3 directly.)
+- **Consumer Products & Payments track (ours):** $30,000 split evenly between 3 teams ($10k each). Best fit: "product teams who care more about a user's first five minutes than the architecture underneath." Judge-signal examples: a payments app that never mentions blockchain; subscriptions charging by the second; shared wallets/group spending settling without an intermediary. (Arteri hits example 1 and 3 directly.)
 - **Grand Champion:** $25,000, picked across all four tracks (other tracks: Onchain Finance & Trading, Social/Attention/Culture, Trust/Identity/AI Infra — $30k each, same 3-team split).
 - **After the hackathon:** top teams get ecosystem support + invite to a residency program alongside other top teams on Monad.
 - **Submission requirements/checklist:** portal is login-gated (GitHub/Google/Discord sign-in at https://hackathon.monad.xyz); its public page describes only "register, form a team, and ship a project… tracks, bounties, milestones, and final submission." Exact submission checklist (repo, demo video, deployment proof) is behind login — see Open questions.
@@ -65,7 +65,7 @@ From https://monad.xyz/developers/hackathons/metropolis:
 - **Spectrum Nodes:** 2 months Business plan free for every team (https://spectrumnodes.com/) — backup RPC.
 - Winners-only (for awareness, not build-time): ack3 security scan for every winning team (https://ack3.ai/); Chainstack annual Pro plans for Track 01 + overall winner; Crouton Digital 3 months unlimited RPC for winning teams; Mercuryo credits/support; Zerion 3 months Builder for all winners; Envio Cloud hosting for winning teams; Envio $1,000 Best Use bounty; Alchemy $1,000 in credits for best projects using Alchemy.
 
-Worth using for ping-pong-pay: QuickNode RPC + Tenderly (simulate top-up/pay flows, debug reverts) from day one; Zerion API only if we need cross-chain balance display (probably skip — YAGNI).
+Worth using for Arteri: QuickNode RPC + Tenderly (simulate top-up/pay flows, debug reverts) from day one; Zerion API only if we need cross-chain balance display (probably skip — YAGNI).
 
 ## 6. Open questions / unknowns
 

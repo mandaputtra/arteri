@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PingPongPay } from "../components/PingPongPay";
+import { Arteri } from "../components/Arteri";
 
 export const Route = createFileRoute("/")({
 	component: function Home() {
-		return <PingPongPay />;
+		return <Arteri />;
 	},
 });

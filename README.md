@@ -1,4 +1,4 @@
-# Ping Pong Pay
+# Arteri
 
 **Approved. Paid.** Instant USDC payments for freelancers — send a link, your client pays,
 the money is yours in about a second. Built for the Monad Metropolis hackathon
@@ -23,8 +23,8 @@ source document: [`docs/getpaidnow-architecture.md`](docs/getpaidnow-architectur
 Prerequisites: [pnpm](https://pnpm.io) 10+ and Node 22+.
 
 ```bash
-git clone https://github.com/mandaputtra/ping-pong-pay
-cd ping-pong-pay/app
+git clone https://github.com/mandaputtra/arteri
+cd arteri/app
 pnpm install
 cp ../.env.example .env      # then fill in VITE_PRIVY_APP_ID
 pnpm dev                     # app on http://localhost:3101
@@ -89,4 +89,4 @@ RPC permits. All code is published for review under [MIT](LICENSE).
 
 - Submission deadline **13 Oct 2026, 11:59 PM ET**; demo video capped at **3 minutes**.
 - Full eligibility, registration, and evidence checklist: GitHub issue
-  [#10](https://github.com/mandaputtra/ping-pong-pay/issues/10).
+  [#10](https://github.com/mandaputtra/arteri/issues/10).

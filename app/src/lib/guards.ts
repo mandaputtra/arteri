@@ -57,7 +57,7 @@ export function isExpired(
 	return nowSeconds >= Number(request.expiry);
 }
 
-const NONCE_KEY = "ppp:used-nonces";
+const NONCE_KEY = "arteri:used-nonces";
 
 // Nonces already spent by this browser. Persisted, so a reload cannot resurrect a
 // spent request. A convenience ledger for the payer: the chain is what actually

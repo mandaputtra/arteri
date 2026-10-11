@@ -1,4 +1,4 @@
-# Payments Stack — ping-pong-pay on Monad
+# Payments Stack — Arteri on Monad
 
 How users get a wallet, get stablecoins, and pay through shareable links.
 Every claim below cites its primary source inline.

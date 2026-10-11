@@ -24,7 +24,7 @@ const signerFor = (account: typeof ALICE) =>
 	createWalletClient({ account, chain: monadTestnet, transport: http() });
 const TOKEN = "0x534b2f3A21130d7a60830c2Df862319e593943A3";
 const NOW = 1_760_000_000;
-const ORIGIN = "https://pingpongpay.fun";
+const ORIGIN = "https://arteri.fun";
 
 describe("parseAmount", () => {
 	it("accepts dollars up to two decimals and converts to base units", () => {

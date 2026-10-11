@@ -59,7 +59,7 @@ describe("chain and domain binding", () => {
 	const request = buildRequest(ALICE.address, TOKEN, "1000000", "", "", NOW);
 
 	it("refuses a signature made for another chain", async () => {
-		const foreign = await signWith({ name: "Ping Pong Pay", chainId: 1 });
+		const foreign = await signWith({ name: "Arteri", chainId: 1 });
 		expect(await verifyRequest(request, foreign)).toBe(false);
 	});
 
@@ -69,7 +69,7 @@ describe("chain and domain binding", () => {
 	});
 
 	it("accepts the signature its own domain produces", async () => {
-		const own = await signWith({ name: "Ping Pong Pay", chainId: 10143 });
+		const own = await signWith({ name: "Arteri", chainId: 10143 });
 		expect(await verifyRequest(request, own)).toBe(true);
 	});
 });
@@ -121,7 +121,7 @@ describe("used-nonce ledger", () => {
 	it("survives a page reload, because the entry is persisted", () => {
 		const storage = fakeStorage();
 		markNonceUsed("1760000000", storage);
-		expect(storage.getItem("ppp:used-nonces")).toContain("1760000000");
+		expect(storage.getItem("arteri:used-nonces")).toContain("1760000000");
 		// A reload constructs the reader again; the value comes back off storage.
 		expect(usedNonces(storage).has("1760000000")).toBe(true);
 	});
@@ -136,7 +136,7 @@ describe("used-nonce ledger", () => {
 
 	it("treats corrupt stored JSON as no nonces rather than throwing", () => {
 		const storage = fakeStorage();
-		storage.setItem("ppp:used-nonces", "{not json");
+		storage.setItem("arteri:used-nonces", "{not json");
 		expect(usedNonces(storage).size).toBe(0);
 	});
 });

@@ -80,7 +80,7 @@ a:hover {
 /* Scoped to the legacy shell. An unlayered element selector outranks every
    Tailwind utility, so the pay screen's inline address chip could not strip the
    decorative chip styling this rule adds. */
-.ppp code,
+.arteri code,
 pre code {
 	font-size: 0.9em;
 	border: 1px solid var(--line);

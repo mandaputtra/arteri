@@ -12,7 +12,7 @@
 # RELAYER_PRIVATE_KEY must never carry a VITE_ prefix: that would ship it to the
 # browser.
 
-app = "ping-pong-pay"
+app = "arteri"
 primary_region = "iad"
 
 [build]

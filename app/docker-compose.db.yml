@@ -1,4 +1,4 @@
-# Local Postgres for ping-pong-pay. Port 5434 because 5432 is taken on this
+# Local Postgres for Arteri. Port 5434 because 5432 is taken on this
 # machine. Fly Postgres is the production counterpart; this compose file is
 # only for local development and the seeder.
 services:
@@ -7,9 +7,9 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_USER: ppp
-      POSTGRES_PASSWORD: ppp
-      POSTGRES_DB: pingpongpay
+      POSTGRES_USER: arteri
+      POSTGRES_PASSWORD: arteri
+      POSTGRES_DB: arteri
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro

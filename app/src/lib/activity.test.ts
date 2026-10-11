@@ -80,7 +80,7 @@ describe("persistence", () => {
 
 	it("returns an empty list rather than throwing on corrupt storage", () => {
 		const storage = fakeStorage();
-		storage.setItem("ppp:activity", "{not json");
+		storage.setItem("arteri:activity", "{not json");
 		expect(loadEntries(storage)).toEqual([]);
 	});
 });

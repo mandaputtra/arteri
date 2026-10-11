@@ -43,7 +43,7 @@ flowchart TB
 
 ## Why a user picks this (PRD §1.3–1.6, pitch deck)
 
-| | Fiverr / Upwork | PayPal / Wise link | Ping Pong Pay |
+| | Fiverr / Upwork | PayPal / Wise link | Arteri |
 |---|---|---|---|
 | Fee on $500 | up to $100 (20%) | ~$9.50 + 3–4% FX spread | ~1% target, no marketplace cut |
 | Wait | 7–14 day hold | hours–5 days | ~1s, straight to balance |

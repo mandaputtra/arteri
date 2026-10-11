@@ -2,7 +2,7 @@
 
 How mature payment products handle the two moments that decide whether a stranger pays you: **payer opens a link** and **payer pays**. Every claim cites its primary source inline; nothing here is invented. Products studied: Stripe (hosted checkout + Payment Links), Zelle, BLIK, Mercado Pago (QR + Checkout Pro), Coinbase Onramp (CDP), Base payments.
 
-Context: ping-pong-pay pays AUSD on Monad, guests pay through a link with no signup, wallet is a Mera passkey EOA, no custom contracts (see `docs/payments-stack.md` §3 Option A, `CONTEXT.md`). Currency shown to users is dollars; the token symbol is an implementation detail.
+Context: Arteri pays AUSD on Monad, guests pay through a link with no signup, wallet is a Mera passkey EOA, no custom contracts (see `docs/payments-stack.md` §3 Option A, `CONTEXT.md`). Currency shown to users is dollars; the token symbol is an implementation detail.
 
 ---
 

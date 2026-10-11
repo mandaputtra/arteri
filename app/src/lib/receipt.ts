@@ -4,7 +4,7 @@ import type { Receipt } from "./pay";
 // Transfer scan in pay.ts decides that. This only lets a returning payer see their
 // receipt immediately instead of re-deriving it from a block explorer.
 
-const KEY = "ppp:receipts";
+const KEY = "arteri:receipts";
 
 export function saveReceipt(nonce: string, receipt: Receipt): void {
 	try {

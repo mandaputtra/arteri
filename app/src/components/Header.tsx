@@ -13,7 +13,7 @@ export default function Header() {
 					className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-[var(--text)] no-underline"
 				>
 					<span className="h-2 w-2 rounded-full bg-[linear-gradient(90deg,#56c6be,#7ed3bf)]" />
-					Ping Pong Pay
+					Arteri
 				</Link>
 				<span className="rounded-[var(--radius-full)] border border-[var(--line-card)] px-2.5 py-1 text-[11px] font-semibold tracking-wider text-[var(--text-subtle)] uppercase">
 					Testnet

@@ -32,7 +32,7 @@ h1 {
 /* Scoped to the legacy shell, not a bare element selector. An unlayered
    `button {}` outranks every Tailwind utility, so the pay screen's own CTA
    rounded/bg/size silently lost to these declarations. */
-.ppp button,
+.arteri button,
 button.ghost {
 	font-size: 1.0625rem;
 	padding: var(--space-3) var(--space-4);
@@ -50,11 +50,11 @@ button.ghost {
 		opacity var(--motion-short) var(--ease-standard);
 }
 
-.ppp button:active {
+.arteri button:active {
 	transform: scale(0.98);
 }
 
-.ppp button:disabled {
+.arteri button:disabled {
 	opacity: 0.6;
 	cursor: default;
 }
@@ -76,7 +76,7 @@ button.ghost {
 }
 
 /* TanStack Start shell overrides */
-.ppp {
+.arteri {
 	max-width: 28rem;
 	margin: 0 auto;
 	padding: var(--space-8) var(--space-4);
@@ -85,14 +85,14 @@ button.ghost {
 
 /* Home centres its content in the remaining page height; the 404 stays
    top-aligned. The column is a flex column, so this only needs to grow. */
-.ppp-center {
+.arteri-center {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.ppp-card {
+.arteri-card {
 	margin-top: var(--space-8);
 	padding: var(--space-4);
 	border: 1px solid var(--line);
@@ -100,24 +100,24 @@ button.ghost {
 	text-align: left;
 }
 
-.ppp-card h2 {
+.arteri-card h2 {
 	font-size: 1rem;
 	margin: 0 0 var(--space-3);
 }
 
-.ppp-field {
+.arteri-field {
 	display: block;
 	margin-bottom: var(--space-3);
 	font-size: 0.875rem;
 }
 
-.ppp-field span {
+.arteri-field span {
 	display: block;
 	margin-bottom: var(--space-1);
 	color: var(--text-muted);
 }
 
-.ppp-field input {
+.arteri-field input {
 	width: 100%;
 	padding: var(--space-2) var(--space-3);
 	font: inherit;
@@ -127,11 +127,11 @@ button.ghost {
 	border-radius: var(--radius-sm);
 }
 
-.ppp-result {
+.arteri-result {
 	margin-top: var(--space-4);
 }
 
-.ppp-link {
+.arteri-link {
 	display: block;
 	margin: var(--space-2) 0;
 	padding: var(--space-2);

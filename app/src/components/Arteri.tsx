@@ -20,7 +20,7 @@ function weekday(): string {
 		.toUpperCase();
 }
 
-export function PingPongPay() {
+export function Arteri() {
 	const { ready, authenticated, user } = usePrivy();
 	const { login } = useLogin();
 	const { logout } = useLogout();
@@ -56,8 +56,8 @@ export function PingPongPay() {
 
 	if (!ready) {
 		return (
-			<main className="ppp ppp-center">
-				<h1>Ping Pong Pay</h1>
+			<main className="arteri arteri-center">
+				<h1>Arteri</h1>
 				<p className="muted">Loading…</p>
 			</main>
 		);
@@ -65,8 +65,8 @@ export function PingPongPay() {
 
 	if (address === null) {
 		return (
-			<main className="ppp ppp-center">
-				<h1>Ping Pong Pay</h1>
+			<main className="arteri arteri-center">
+				<h1>Arteri</h1>
 				<p className="muted">
 					Easy dollar payments. No passwords, no crypto fuss.
 				</p>
@@ -86,12 +86,12 @@ export function PingPongPay() {
 	// one button, asked once. After this the name signs links and greets.
 	if (shortName === "") {
 		return (
-			<main className="ppp ppp-center">
+			<main className="arteri arteri-center">
 				<h1>What should we call you?</h1>
 				<p className="muted">
 					A short name for your greeting and your payment links.
 				</p>
-				<label className="ppp-field">
+				<label className="arteri-field">
 					<span>Short name</span>
 					<input
 						placeholder="Avery"

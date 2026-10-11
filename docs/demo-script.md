@@ -80,7 +80,7 @@ On screen: *"Don't pay this one."*
 
 ### 2:50–3:00 — Close (10s)
 
-Card: **Ping Pong Pay — approved. Paid.** Link to the repo.
+Card: **Arteri — approved. Paid.** Link to the repo.
 
 ## Hard rules
 

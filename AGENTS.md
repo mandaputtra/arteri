@@ -1,4 +1,4 @@
-# AGENTS.md — ping-pong-pay
+# AGENTS.md — arteri
 
 ## What this is
 Easy dollar payments for freelancers on Monad (Metropolis hackathon, Track 02). Payable links,

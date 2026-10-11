@@ -10,7 +10,7 @@ locally.
 - Your Privy app id from <https://dashboard.privy.io>.
 - **The deployed origin added to Privy.** This is the step that breaks sign-in and it is
   invisible until you test it: dashboard → your app → **Allowed Origins** → add
-  `https://ping-pong-pay.fly.dev`. Without it Privy refuses to load and the app renders a
+  `https://arteri.fly.dev`. Without it Privy refuses to load and the app renders a
   permanent "Loading…".
 - The relayer wallet funded with testnet MON (gas) and testnet USDC (inventory).
 
@@ -37,11 +37,11 @@ The image is verified to build and boot, so you can rehearse the deploy before p
 one:
 
 ```bash
-docker build -t ppp --build-arg VITE_PRIVY_APP_ID=<id> .
+docker build -t arteri --build-arg VITE_PRIVY_APP_ID=<id> .
 docker run --rm -p 3101:3101 -p 8791:8791 \
   -e RELAYER_PRIVATE_KEY=0x... \
   -e ALLOWED_ORIGIN=http://localhost:3101 \
-  ppp
+  arteri
 ```
 
 Then open <http://localhost:3101>. Identical to `pnpm dev` + `pnpm relayer`, which is the
@@ -56,10 +56,10 @@ fly launch --no-deploy --copy-config
 # env vars instead does nothing to the client bundle — a quiet, common mistake.
 fly deploy \
   --build-arg VITE_PRIVY_APP_ID=<your_app_id> \
-  --build-arg VITE_RELAYER_URL=https://ping-pong-pay.fly.dev:8791
+  --build-arg VITE_RELAYER_URL=https://arteri-relayer.fly.dev:8791
 
 # Secrets. Never as build args, never with a VITE_ prefix.
-fly secrets set RELAYER_PRIVATE_KEY=0x... ALLOWED_ORIGIN=https://ping-pong-pay.fly.dev
+fly secrets set RELAYER_PRIVATE_KEY=0x... ALLOWED_ORIGIN=https://arteri.fly.dev
 ```
 
 `ALLOWED_ORIGIN` pins the relayer's CORS to the app's origin. Without it the relayer
@@ -69,8 +69,8 @@ USDC. That is an open faucet, not a demo.
 ## Verify before you record anything
 
 ```bash
-curl -s -o /dev/null -w "app %{http_code}\n" https://ping-pong-pay.fly.dev/
-curl -s -o /dev/null -w "relayer %{http_code}\n" -X OPTIONS https://ping-pong-pay.fly.dev:8791/topup
+curl -s -o /dev/null -w "app %{http_code}\n" https://arteri.fly.dev/
+curl -s -o /dev/null -w "relayer %{http_code}\n" -X OPTIONS https://arteri-relayer.fly.dev:8791/topup
 fly logs
 ```
 

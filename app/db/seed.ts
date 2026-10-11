@@ -1,5 +1,5 @@
 // Seeds demo history for a known account. Run against local compose or Fly:
-//   DATABASE_URL=postgres://ppp:ppp@localhost:5434/pingpongpay \
+//   DATABASE_URL=postgres://arteri:arteri@localhost:5434/arteri \
 //     node --experimental-strip-types db/seed.ts <wallet-address>
 //
 // The rows reference the seeder's own address as both requester and recipient,

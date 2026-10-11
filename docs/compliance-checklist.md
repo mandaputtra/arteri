@@ -10,7 +10,7 @@ only you have access to. Everything else is verified in this repo.
 
 | Clause | Requirement | Status | Evidence |
 |---|---|---|---|
-| §4.1.1 | Public GitHub repo | ✅ | `mandaputtra/ping-pong-pay`, visibility PUBLIC |
+| §4.1.1 | Public GitHub repo | ✅ | `mandaputtra/arteri`, visibility PUBLIC |
 | §4.1.1 | Complete source | ✅ | 25 commits, 2026-09-28 → 2026-10-05 |
 | §4.1.1 | Commit history over build window | ✅ | First commit 2026-09-28, last 2026-10-05. Hackathon build window is 1 Sep – 13 Oct 2026; **every commit falls inside it** |
 | §4.1.1 | Open source license | ✅ | MIT ([LICENSE](../LICENSE)) |

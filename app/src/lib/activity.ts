@@ -22,9 +22,9 @@ const TRANSFER_EVENT = parseAbi([
 // upgrade if real history is ever needed.
 const SCAN_CHUNK_BLOCKS = 90n;
 
-const CHECKPOINT_KEY = "ppp:scan-checkpoints";
-const NOTES_KEY = "ppp:notes";
-const LIST_KEY = "ppp:activity";
+const CHECKPOINT_KEY = "arteri:scan-checkpoints";
+const NOTES_KEY = "arteri:notes";
+const LIST_KEY = "arteri:activity";
 
 const publicClient = createPublicClient({
 	chain: monadTestnet,

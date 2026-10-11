@@ -24,10 +24,10 @@ export function getRouter() {
 }
 function NotFoundFallback() {
 	return (
-		<main className="ppp">
+		<main className="arteri">
 			<h1>That page doesn&apos;t exist</h1>
 			<p className="muted">The link may be old or mistyped.</p>
-			<Link to="/">Back to Ping Pong Pay</Link>
+			<Link to="/">Back to Arteri</Link>
 		</main>
 	);
 }

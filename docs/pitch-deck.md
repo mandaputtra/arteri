@@ -1,6 +1,6 @@
-# Ping Pong Pay — Pitch Deck
+# Arteri — Pitch Deck
 
-Converted from `Arteri _ Pitch Deck.pptx`, renamed to Ping Pong Pay, token set to USDC. 14
+Converted from `Arteri _ Pitch Deck.pptx`, token set to USDC. 14
 slides. Unfilled placeholders shown as `[X]` / `[Y]` / `[Z]` / `[N]` remain unfilled.
 
 **Monad Metropolis Hackathon · Track 02, Consumer Products & Payments**
@@ -19,7 +19,7 @@ slides. Unfilled placeholders shown as `[X]` / `[Y]` / `[Z]` / `[N]` remain unfi
 
 > **Approved. Paid.**
 >
-> Ping Pong Pay gives freelancers instant payments. Faster than a bank, cheaper than a
+> Arteri gives freelancers instant payments. Faster than a bank, cheaper than a
 > marketplace, as easy as a link.
 >
 > Send a link, your client pays, and the money is yours in about a second.
@@ -28,7 +28,7 @@ slides. Unfilled placeholders shown as `[X]` / `[Y]` / `[Z]` / `[N]` remain unfi
 
 1. Overview — the idea in one line
 2. Problem — what hurts today
-3. Solution — what Ping Pong Pay does
+3. Solution — what Arteri does
 4. Target Market — who we build for
 5. Product — flow, tech, and why Monad
 6. Market Size — TAM, SAM, SOM
@@ -100,7 +100,7 @@ but has no simple, safe alternative. Wants a payment that feels like a normal in
 |---|---|
 | Face ID sign-up | A passkey creates a wallet. No seed phrase. |
 | "$500 paid" | USDC moves directly from client wallet to freelancer wallet. |
-| One Pay button | One on-chain transaction. Network gas is covered by Ping Pong Pay. |
+| One Pay button | One on-chain transaction. Network gas is covered by Arteri. |
 | Optional Wallet screen | Checkable balance and history, added because early users asked for it. |
 
 ## 08 · Product · Why Monad
@@ -110,7 +110,7 @@ but has no simple, safe alternative. Wants a payment that feels like a normal in
 | | | |
 |---|---|---|
 | **< 1 sec** confirmation | Paying feels like a card tap, not a bank transfer. | |
-| **~$0** fees | So low that Ping Pong Pay can absorb them invisibly. | |
+| **~$0** fees | So low that Arteri can absorb them invisibly. | |
 | **EVM** compatible | Built with standard tools: Privy or Dynamic, viem, Solidity. | |
 
 > Why Monad: speed and cost are what make a freelancer payment product possible.
@@ -132,7 +132,7 @@ but has no simple, safe alternative. Wants a payment that feels like a normal in
 > **The market is moving here, and users shaped our product.**
 
 These are market figures about existing providers (Deel, Remote, Rise). They are
-context for the opportunity, **not** features of ping-pong pay — the demo ships no
+context for the opportunity, **not** features of Arteri — the demo ships no
 off-ramp and cash out is simulated.
 
 | | |
@@ -157,7 +157,7 @@ off-ramp and cash out is simulated.
 | | |
 |---|---|
 | Marketplace, $500 job | Up to $100 |
-| Ping Pong Pay, $500 job at [X]% per transaction | $[Y] |
+| Arteri, $500 job at [X]% per transaction | $[Y] |
 
 **Second stream:** optional Plus tier — invoice templates, milestone payments, and the income
 dashboard. The core payment flow is available on every tier.
@@ -166,7 +166,7 @@ dashboard. The core payment flow is available on every tier.
 
 > **Nothing built for one direct, instant payment.**
 
-| | Marketplace | PayPal.me / Wise link | Payroll platforms | Ping Pong Pay |
+| | Marketplace | PayPal.me / Wise link | Payroll platforms | Arteri |
 |---|---|---|---|---|
 | **Speed** | 7–14 days | Days | Scheduled cycles | ~1 second |
 | **Fee** | 10–20% | Stacked fees | Subscription | Small fee per transaction |
@@ -195,7 +195,7 @@ dashboard. The core payment flow is available on every tier.
 
 ## 14 · The Ask
 
-> **Ping Pong Pay**
+> **Arteri**
 >
 > Money moves the moment work is done.
 >

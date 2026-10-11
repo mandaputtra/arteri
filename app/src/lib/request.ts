@@ -20,7 +20,7 @@ import {
 export const REQUEST_EXPIRY_SECONDS = 60 * 60 * 24 * 7; // 7 days
 
 const domain = {
-	name: "Ping Pong Pay",
+	name: "Arteri",
 	version: "1",
 	chainId: 10143, // Monad testnet
 } as const;
