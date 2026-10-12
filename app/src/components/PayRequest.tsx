@@ -4,7 +4,7 @@ import {
 	Lock,
 	ShieldCheck,
 } from "@phosphor-icons/react";
-import { useLogin, usePrivy, useWallets } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { useAccount, useConnect, useConnectorClient } from "wagmi";
 import { useEffect, useState } from "react";
 import { createWalletClient, custom, type WalletClient } from "viem";
@@ -88,8 +88,7 @@ export function PayRequest({
 	description: string;
 	requesterName: string;
 }) {
-	const { ready, authenticated, user } = usePrivy();
-	const { login } = useLogin();
+	const { ready } = usePrivy();
 	const { wallets } = useWallets();
 	// External payer (ADR-0004): injected wallet first, Privy fallback below.
 	const { address: externalAddress } = useAccount();
@@ -375,17 +374,10 @@ export function PayRequest({
 		return (
 			<main className={SHELL}>
 				<div className={CARD}>
-					<h1 className="text-xl font-bold">Create your wallet to pay</h1>
+					<h1 className="text-xl font-bold">No wallet found</h1>
 					<p className="mt-2 text-sm text-[var(--text-muted)]">
-						One tap. No seed phrase, no app install.
+						Install a wallet extension in your browser, then reload this page.
 					</p>
-					<button
-						type="button"
-						className={`${CTA("violet")} mt-6`}
-						onClick={login}
-					>
-						Get started
-					</button>
 				</div>
 			</main>
 		);
@@ -434,11 +426,6 @@ export function PayRequest({
 	const { request, alreadyPaid, rowId } = stage;
 	const who = requesterName || "this freelancer";
 	const amount = usdFromBaseUnits(request.amount);
-	// The pen flips the CTA colour once the payer is signed in: violet while there
-	// is still a login step between them and the payment, teal when the next tap
-	// moves the money. Teal is the action colour across the product, so the flip
-	// means something rather than being decoration.
-	const signedIn = Boolean(authenticated && user);
 	return (
 		<main className={SHELL}>
 			<div className={CARD}>
@@ -510,15 +497,6 @@ export function PayRequest({
 								{externalConnecting
 									? "Connecting…"
 									: "Pay with your wallet"}
-							</button>
-						)}
-						{!externalAddress && (
-							<button
-								type="button"
-								className={`${CTA("violet")} mt-2`}
-								onClick={signedIn ? () => pay(request, rowId) : login}
-							>
-								{signedIn ? "Pay from wallet" : "Sign in to pay from wallet"}
 							</button>
 						)}
 					</>
