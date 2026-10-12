@@ -14,7 +14,13 @@ import { Sheet } from "./Sheet";
 // The reference puts Request beside Withdraw as a tile. The tile opens a
 // bottom sheet with the same signing flow; the link result renders inside the
 // sheet, so the homepage never grows a form section.
-export function RequestTile({ recipient }: { recipient: `0x${string}` }) {
+export function RequestTile({
+	recipient,
+	requesterName,
+}: {
+	recipient: `0x${string}`;
+	requesterName: string;
+}) {
 	const [open, setOpen] = useState(false);
 	if (!open) {
 		return (
@@ -39,16 +45,21 @@ export function RequestTile({ recipient }: { recipient: `0x${string}` }) {
 	}
 	return (
 		<Sheet title="Request a payment" onClose={() => setOpen(false)}>
-			<CreateRequest recipient={recipient} />
+			<CreateRequest recipient={recipient} requesterName={requesterName} />
 		</Sheet>
 	);
 }
 
-export function CreateRequest({ recipient }: { recipient: `0x${string}` }) {
+export function CreateRequest({
+	recipient,
+	requesterName,
+}: {
+	recipient: `0x${string}`;
+	requesterName: string;
+}) {
 	const { wallets } = useWallets();
 	const [amount, setAmount] = useState("");
 	const [description, setDescription] = useState("");
-	const [requesterName, setRequesterName] = useState("");
 	const [link, setLink] = useState("");
 	const [copied, setCopied] = useState(false);
 	const [error, setError] = useState("");
@@ -129,13 +140,6 @@ export function CreateRequest({ recipient }: { recipient: `0x${string}` }) {
 
 	return (
 		<div className="space-y-4">
-			<FormField label="Your name">
-				<FormInput
-					placeholder="Sarah"
-					value={requesterName}
-					onChange={(e) => setRequesterName(e.target.value)}
-				/>
-			</FormField>
 			<FormField label="Amount (USDC)">
 				<FormInput
 					inputMode="decimal"

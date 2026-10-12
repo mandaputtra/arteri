@@ -166,7 +166,7 @@ export function Arteri() {
 				</p>
 			</section>
 			<div className="mt-3 grid grid-cols-2 gap-3">
-				<RequestTile recipient={address} />
+				<RequestTile recipient={address} requesterName={shortName ?? ""} />
 				<WithdrawTile balance={balance} />
 			</div>
 			<ActivityList address={address} />

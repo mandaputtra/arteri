@@ -449,7 +449,7 @@ export function PayRequest({
 							disabled={!rowId}
 						>
 							<CreditCard weight="bold" aria-hidden="true" className="size-4" />
-							{`Pay ${amount} by card`}
+							{`Pay ${amount} to ${who} by card`}
 						</button>
 						<button
 							type="button"
