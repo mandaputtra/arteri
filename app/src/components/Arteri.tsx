@@ -52,11 +52,12 @@ export function Arteri() {
 	// stale the moment a client pays. Same 4s cadence, same cancel-on-unmount.
 	useEffect(() => {
 		if (!address) return;
+		const wallet = address;
 		let cancelled = false;
-		let timer = 0;
+		let timer: ReturnType<typeof setTimeout> | undefined;
 		async function tick() {
 			try {
-				const next = await getBalance(address);
+				const next = await getBalance(wallet);
 				if (!cancelled) setBalance(next);
 			} catch (err: unknown) {
 				if (!cancelled) setError(friendlyError(err));
