@@ -1,7 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { WagmiProvider } from "wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PayRequest } from "../components/PayRequest";
+import { externalWalletConfig } from "../lib/external-wallet";
 import { displayFieldsFrom } from "../lib/request";
 
+// wagmi needs its own QueryClient; the app shell owns another one for its own
+// queries, so the pay route carries a local instance rather than sharing.
+const payQueryClient = new QueryClient();
 export const Route = createFileRoute("/pay/$slug")({
 	component: PayRoute,
 });
@@ -13,10 +19,14 @@ function PayRoute() {
 	// comes from the signed blob and is verified before anything is payable.
 	const { description, requesterName } = displayFieldsFrom(Route.useSearch());
 	return (
-		<PayRequest
-			slug={slug}
-			description={description}
-			requesterName={requesterName}
-		/>
+		<WagmiProvider config={externalWalletConfig}>
+			<QueryClientProvider client={payQueryClient}>
+				<PayRequest
+					slug={slug}
+					description={description}
+					requesterName={requesterName}
+				/>
+			</QueryClientProvider>
+		</WagmiProvider>
 	);
 }

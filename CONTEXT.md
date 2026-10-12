@@ -8,3 +8,5 @@ Ubiquitous language. Glossary only, no implementation.
 
 - **User**: a person sending or receiving money through Arteri. Has no crypto knowledge assumed.
 - **Wallet**: a Mera passkey-derived self-custodial EOA. Created at signup via Face ID / fingerprint; no seed phrase, no vendor backend.
+- **External payer**: a payer who pays from their own injected wallet (MetaMask et al) holding their own USDC and MON. No signup, no Privy; verification of the request is identical.
+- **Embedded wallet**: a Privy-created wallet owned by the User, used for signup, dashboard, and (as fallback) paying.

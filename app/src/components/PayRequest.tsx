@@ -5,8 +5,9 @@ import {
 	ShieldCheck,
 } from "@phosphor-icons/react";
 import { useLogin, usePrivy, useWallets } from "@privy-io/react-auth";
+import { useAccount, useConnect, useConnectorClient } from "wagmi";
 import { useEffect, useState } from "react";
-import { createWalletClient, custom } from "viem";
+import { createWalletClient, custom, type WalletClient } from "viem";
 import { monadTestnet } from "viem/chains";
 import { usdFromBaseUnits } from "../lib/amount";
 import {
@@ -90,6 +91,10 @@ export function PayRequest({
 	const { ready, authenticated, user } = usePrivy();
 	const { login } = useLogin();
 	const { wallets } = useWallets();
+	// External payer (ADR-0004): injected wallet first, Privy fallback below.
+	const { address: externalAddress } = useAccount();
+	const { connect, connectors, isPending: externalConnecting } = useConnect();
+	const { data: externalClient } = useConnectorClient();
 	const [stage, setStage] = useState<Stage>({ kind: "checking" });
 	// Card leg (ADR-0002). Kept separate from `stage` because it can run while
 	// signed out: a card payer never gets a wallet at all.
@@ -226,6 +231,38 @@ export function PayRequest({
 			});
 		}
 	}
+	// External payer (ADR-0004): same transfer, their wallet, their USDC, their
+	// MON. A 0-MON wallet is rejected by the chain at admission; the copy says
+	// what to do in plain words, per the grill decision (payer holds gas).
+	async function payExternal(request: DecodedRequest, rowId: string | null) {
+		if (!externalClient || !externalAddress) {
+			setStage({ kind: "needsWallet" });
+			return;
+		}
+		setStage({ kind: "submitting" });
+		try {
+			const receipt = await payRequest(
+				externalClient as WalletClient,
+				externalAddress,
+				request,
+			);
+			setStage({ kind: "confirming", hash: receipt.hash });
+			markNonceUsed(request.nonce);
+			saveReceipt(request.nonce, receipt);
+			if (rowId) markPaid(rowId, receipt.hash).catch(() => {});
+			setStage({ kind: "paid", receipt });
+		} catch (err) {
+			const message = err instanceof Error ? err.message : String(err);
+			setStage({
+				kind: "failed",
+				reason: /insufficient|balance/i.test(message)
+					? "Your wallet needs testnet MON for gas. Get some from the Monad faucet, then try again."
+					: "That didn't go through. Your money hasn't moved. Try again.",
+				request,
+			});
+		}
+	}
+
 
 	// Card leg (ADR-0002): open a checkout for this request row, then settle it.
 	// The relayer pays the freelancer from its float, so the payer needs no
@@ -451,13 +488,39 @@ export function PayRequest({
 							<CreditCard weight="bold" aria-hidden="true" className="size-4" />
 							{`Pay ${amount} to ${who} by card`}
 						</button>
-						<button
-							type="button"
-							className={`${CTA("violet")} mt-2`}
-							onClick={signedIn ? () => pay(request, rowId) : login}
-						>
-							{signedIn ? "Pay from wallet" : "Sign in to pay from wallet"}
-						</button>
+						{externalAddress ? (
+							<button
+								type="button"
+								className={`${CTA("violet")} mt-2`}
+								onClick={() => payExternal(request, rowId)}
+							>
+								{`Pay from ${shortAddress(externalAddress)}`}
+							</button>
+						) : (
+							<button
+								type="button"
+								className={`${CTA("violet")} mt-2`}
+								onClick={() => {
+									const connector = connectors[0];
+									if (connector) connect({ connector });
+									else setStage({ kind: "needsWallet" });
+								}}
+								disabled={externalConnecting}
+							>
+								{externalConnecting
+									? "Connecting…"
+									: "Pay with your wallet"}
+							</button>
+						)}
+						{!externalAddress && (
+							<button
+								type="button"
+								className={`${CTA("violet")} mt-2`}
+								onClick={signedIn ? () => pay(request, rowId) : login}
+							>
+								{signedIn ? "Pay from wallet" : "Sign in to pay from wallet"}
+							</button>
+						)}
 					</>
 				)}
 			</div>
