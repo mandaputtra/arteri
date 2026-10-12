@@ -15,9 +15,9 @@ const ERC20_ABI = parseAbi([
 	"function transfer(address to, uint256 amount) returns (bool)",
 ]);
 
-// Monad charges the declared gasLimit, not gas used, so never let an estimate
-// stand. Same reason the relayer passes an explicit value.
-const TRANSFER_GAS = 100_000n;
+// First transfer to a fresh address costs more (new storage slots); 100k ran
+// out of gas on the relayer side for exactly this case. 150k covers it.
+const TRANSFER_GAS = 150_000n;
 
 // ponytail: replay detection scans a bounded window of recent blocks rather than
 // the request's full 7-day life. The public Monad RPC rejects any eth_getLogs

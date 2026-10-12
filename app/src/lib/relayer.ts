@@ -12,8 +12,10 @@ const ERC20_ABI = parseAbi([
 	"function transfer(address to, uint256 amount) returns (bool)",
 ]);
 
-// Monad charges the declared gasLimit, not gas used, so never let an estimate stand.
-const TRANSFER_GAS = 100_000n;
+// First transfer to a fresh address is the expensive case (new storage slots),
+// and a revert here burns the whole declared limit. 150k covers it; Monad
+// charges the declared limit, so no higher without a measured reason.
+const TRANSFER_GAS = 150_000n;
 
 const publicClient = createPublicClient({
 	chain: monadTestnet,
