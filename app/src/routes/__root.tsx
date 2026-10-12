@@ -57,8 +57,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 			{
 				rel: "icon",
-				href: "/favicon.svg",
-				type: "image/svg+xml",
+				href: "/logo-arteri.png",
+				type: "image/png",
 			},
 		],
 	}),

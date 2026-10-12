@@ -12,8 +12,7 @@ export default function Header() {
 					to="/"
 					className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-[var(--text)] no-underline"
 				>
-					<span className="h-2 w-2 rounded-full bg-[linear-gradient(90deg,#E0212B,#f0555d)]" />
-					Arteri
+					<img src="/logo-arteri.png" alt="Arteri" className="h-7 w-auto" />
 				</Link>
 				<span className="rounded-[var(--radius-full)] border border-[var(--line-card)] px-2.5 py-1 text-[11px] font-semibold tracking-wider text-[var(--text-subtle)] uppercase">
 					Testnet

@@ -17,7 +17,7 @@ describe("Arteri shell", () => {
 
 		expect(html).toContain("Send a link. Get paid.");
 		expect(html).toContain("Instant payments for freelancers.");
-		expect(html).toContain("Get started");
+		expect(html).toContain("logo-arteri.png");
 		expect(html).not.toMatch(
 			/seed phrase|wallet address|gas|chainId|0x[a-f0-9]{6}/i,
 		);

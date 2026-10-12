@@ -66,6 +66,7 @@ export function Arteri() {
 	if (address === null) {
 		return (
 			<main className="arteri arteri-center">
+				<img src="/logo-arteri.png" alt="Arteri" className="mx-auto h-24 w-auto" />
 				<h1>Send a link. Get paid.</h1>
 				<p className="muted">
 					Instant payments for freelancers. Faster than a bank, cheaper than a
