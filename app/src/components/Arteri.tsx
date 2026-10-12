@@ -66,9 +66,10 @@ export function Arteri() {
 	if (address === null) {
 		return (
 			<main className="arteri arteri-center">
-				<h1>Arteri</h1>
+				<h1>Send a link. Get paid.</h1>
 				<p className="muted">
-					Easy dollar payments. No passwords, no crypto fuss.
+					Instant payments for freelancers. Faster than a bank, cheaper than a
+					marketplace, as easy as a link.
 				</p>
 				<button type="button" onClick={login}>
 					Get started
@@ -147,7 +148,7 @@ export function Arteri() {
 			</div>
 			<section
 				aria-label="Available balance"
-				className="mt-4 rounded-[22px] bg-[var(--teal)] p-5 text-white shadow-[0_18px_40px_rgb(47_92_85/0.28)]"
+				className="mt-4 rounded-[22px] bg-[var(--teal)] p-5 text-white shadow-[0_18px_40px_rgb(176_18_28/0.28)]"
 			>
 				<div className="flex items-center justify-between">
 					<p className="text-[11px] font-semibold tracking-[0.14em] uppercase opacity-90">

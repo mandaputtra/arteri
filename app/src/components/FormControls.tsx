@@ -25,7 +25,7 @@ export function FormButton({
 			type="button"
 			onClick={onClick}
 			disabled={disabled}
-			className="group flex min-h-[56px] w-full items-center justify-between gap-3 rounded-full bg-[var(--teal)] py-2 pr-2 pl-6 text-[17px] font-semibold text-white shadow-[0_14px_30px_rgb(47_92_85/0.32),inset_0_1px_1px_rgb(255_255_255/0.22)] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:shadow-[0_18px_38px_rgb(47_92_85/0.4),inset_0_1px_1px_rgb(255_255_255/0.22)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
+			className="group flex min-h-[56px] w-full items-center justify-between gap-3 rounded-full bg-[var(--teal)] py-2 pr-2 pl-6 text-[17px] font-semibold text-white shadow-[0_14px_30px_rgb(176_18_28/0.32),inset_0_1px_1px_rgb(255_255_255/0.22)] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:shadow-[0_18px_38px_rgb(176_18_28/0.4),inset_0_1px_1px_rgb(255_255_255/0.22)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
 		>
 			<span>{busy ? "Working…" : children}</span>
 			<span

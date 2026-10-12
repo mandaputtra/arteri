@@ -7,10 +7,9 @@
   --font-display: "Playfair Display", Georgia, serif;
 }
 
-/* Warm paper theme, measured off the reference: paper #F9F6F1, ink slate
-   #24333D, deep teal #3C726B action. Light-only: no dark overrides anywhere.
-   The serif display face mirrors the reference's Playfair headline; body stays
-   Manrope, which the reference uses too. */
+/* Warm paper theme. Brand action is Arteri red #E0212B. Light-only: no dark
+   overrides anywhere. The serif display face mirrors the reference's Playfair
+   headline; body stays Manrope, which the reference uses too. */
 :root {
   --font-display: "Playfair Display", Georgia, serif;
   --paper: #f9f6f1;
@@ -18,24 +17,24 @@
   --ink: #24333d;
   --ink-soft: #5d6f79;
   --ink-faint: #8ba0aa;
-  --teal: #3c726b;
-  --teal-deep: #2f5c55;
-  --teal-wash: rgba(60, 114, 107, 0.1);
+  --teal: #e0212b;
+  --teal-deep: #b3121c;
+  --teal-wash: rgba(224, 33, 43, 0.1);
   --card: #ffffff;
   --line: rgba(36, 51, 61, 0.12);
   --amber: #b7791f;
   --green: #2f7d4f;
   --sea-ink: #24333d;
   --sea-ink-soft: #5d6f79;
-  --lagoon: #3c726b;
-  --lagoon-deep: #2f5c55;
+  --lagoon: #e0212b;
+  --lagoon-deep: #b3121c;
   --palm: #2f7d4f;
   --sand: #f1ebe1;
   --foam: #f9f6f1;
   --surface: #ffffff;
   --surface-strong: #ffffff;
   --inset-glint: rgba(255, 255, 255, 0.8);
-  --kicker: #3c726b;
+  --kicker: #e0212b;
   --bg-base: #f9f6f1;
   --header-bg: rgba(249, 246, 241, 0.9);
   --chip-bg: #ffffff;
@@ -67,14 +66,13 @@ body {
 }
 
 a {
-  color: var(--lagoon-deep);
-  text-decoration-color: rgba(50, 143, 151, 0.4);
+  text-decoration-color: rgba(224, 33, 43, 0.4);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 
 a:hover {
-  color: #246f76;
+  color: #b3121c;
 }
 
 /* Scoped to the legacy shell. An unlayered element selector outranks every

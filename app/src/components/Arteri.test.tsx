@@ -15,9 +15,8 @@ describe("Arteri shell", () => {
 	it("renders the signed-out state with jargon-free copy", () => {
 		const html = renderToStaticMarkup(createElement(Arteri));
 
-		expect(html).toContain(
-			"Easy dollar payments. No passwords, no crypto fuss.",
-		);
+		expect(html).toContain("Send a link. Get paid.");
+		expect(html).toContain("Instant payments for freelancers.");
 		expect(html).toContain("Get started");
 		expect(html).not.toMatch(
 			/seed phrase|wallet address|gas|chainId|0x[a-f0-9]{6}/i,

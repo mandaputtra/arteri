@@ -21,7 +21,7 @@
 	--surface-raised: #f6f7f9;
 	--text: #24333d;
 	--text-muted: #5d6f79;
-	--accent: #3c726b;
+	--accent: #e0212b;
 	--text-on-accent: #ffffff;
 	--danger: #b3261e;
 	--success: #2f7d4f;
@@ -33,13 +33,13 @@
 	--surface-elevated: #f1ebe1;
 	--line-card: rgba(36, 51, 61, 0.12);
 	--text-subtle: #8ba0aa;
-	--accent-teal: #3c726b;
-	--accent-teal-dim: rgba(60, 114, 107, 0.1);
+	--accent-teal: #e0212b;
+	--accent-teal-dim: rgba(224, 33, 43, 0.1);
 
 	/* One soft accent glow behind the card, kept low enough to read as depth
 	   rather than as a second accent. */
-	--pay-glow: rgba(60, 114, 107, 0.12);
-	--pay-glow-teal: rgba(60, 114, 107, 0.1);
+	--pay-glow: rgba(224, 33, 43, 0.12);
+	--pay-glow-teal: rgba(224, 33, 43, 0.1);
 
 	/* M3 duration tokens */
 	--motion-short: 150ms;
