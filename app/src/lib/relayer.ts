@@ -54,7 +54,8 @@ export async function topUp(address: Address): Promise<Hex> {
 			gas: TRANSFER_GAS,
 		});
 		const receipt = await publicClient.waitForTransactionReceipt({ hash });
-		if (receipt.status === "reverted") throw new Error("topup reverted");
+		if (receipt.status === "reverted")
+			throw new Error(`topup reverted: ${hash}`);
 		return hash;
 	} catch (err) {
 		release(address, prior);
