@@ -47,11 +47,28 @@ export function Arteri() {
 			cancelled = true;
 		};
 	}, [address]);
+	// Balance polls like the activity list below: a payment landing from another
+	// browser never touches this component, so a one-shot read on sign-in goes
+	// stale the moment a client pays. Same 4s cadence, same cancel-on-unmount.
 	useEffect(() => {
 		if (!address) return;
-		getBalance(address).then(setBalance, (err: unknown) =>
-			setError(friendlyError(err)),
-		);
+		let cancelled = false;
+		let timer = 0;
+		async function tick() {
+			try {
+				const next = await getBalance(address);
+				if (!cancelled) setBalance(next);
+			} catch (err: unknown) {
+				if (!cancelled) setError(friendlyError(err));
+			} finally {
+				if (!cancelled) timer = setTimeout(tick, 4_000);
+			}
+		}
+		tick();
+		return () => {
+			cancelled = true;
+			clearTimeout(timer);
+		};
 	}, [address]);
 
 	if (!ready) {
