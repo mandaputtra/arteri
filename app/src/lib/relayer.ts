@@ -65,6 +65,7 @@ export async function payout(to: Address, amount: bigint): Promise<Hex> {
 		args: [to, amount],
 		gas: TRANSFER_GAS,
 	});
-	await publicClient.waitForTransactionReceipt({ hash });
+	const receipt = await publicClient.waitForTransactionReceipt({ hash });
+	if (receipt.status === "reverted") throw new Error("payout reverted");
 	return hash;
 }
