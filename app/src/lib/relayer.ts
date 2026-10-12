@@ -26,6 +26,12 @@ export function relayerAccount() {
 	return privateKeyToAccount(key as `0x${string}`);
 }
 
+// A zero-MON wallet cannot send any transaction on Monad (Reserve Balance
+// rejects it at admission), so demo top-up also drips gas. One wallet-path
+// payment costs ~0.01 MON; the drip covers several, capped per address by the
+// same ledger as the USDC top-up.
+export const GAS_DRIP_AMOUNT = 50_000_000_000_000_000n; // 0.05 MON
+
 export async function topUp(address: Address): Promise<Hex> {
 	const prior = reserve(address);
 	try {
@@ -34,6 +40,12 @@ export async function topUp(address: Address): Promise<Hex> {
 			chain: monadTestnet,
 			transport: http(),
 		});
+		const gasHash = await client.sendTransaction({
+			to: address,
+			value: GAS_DRIP_AMOUNT,
+			gas: 21_000n,
+		});
+		await publicClient.waitForTransactionReceipt({ hash: gasHash });
 		const hash = await client.writeContract({
 			address: USDC_TESTNET,
 			abi: ERC20_ABI,
@@ -41,7 +53,8 @@ export async function topUp(address: Address): Promise<Hex> {
 			args: [address, TOPUP_AMOUNT],
 			gas: TRANSFER_GAS,
 		});
-		await publicClient.waitForTransactionReceipt({ hash });
+		const receipt = await publicClient.waitForTransactionReceipt({ hash });
+		if (receipt.status === "reverted") throw new Error("topup reverted");
 		return hash;
 	} catch (err) {
 		release(address, prior);
