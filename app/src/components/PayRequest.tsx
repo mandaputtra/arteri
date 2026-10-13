@@ -5,9 +5,9 @@ import {
 	ShieldCheck,
 } from "@phosphor-icons/react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
-import { useAccount, useConnect, useConnectorClient } from "wagmi";
+import { useAccount, useConnect, useSwitchChain } from "wagmi";
 import { useEffect, useState } from "react";
-import { createWalletClient, custom, type WalletClient } from "viem";
+import { createWalletClient, custom, type EIP1193Provider } from "viem";
 import { monadTestnet } from "viem/chains";
 import { usdFromBaseUnits } from "../lib/amount";
 import {
@@ -91,9 +91,9 @@ export function PayRequest({
 	const { ready } = usePrivy();
 	const { wallets } = useWallets();
 	// External payer (ADR-0004): injected wallet first, Privy fallback below.
-	const { address: externalAddress } = useAccount();
+	const { address: externalAddress, chainId: externalChainId } = useAccount();
 	const { connect, connectors, isPending: externalConnecting } = useConnect();
-	const { data: externalClient } = useConnectorClient();
+	const { switchChainAsync } = useSwitchChain();
 	const [stage, setStage] = useState<Stage>({ kind: "checking" });
 	// Card leg (ADR-0002). Kept separate from `stage` because it can run while
 	// signed out: a card payer never gets a wallet at all.
@@ -234,17 +234,28 @@ export function PayRequest({
 	// MON. A 0-MON wallet is rejected by the chain at admission; the copy says
 	// what to do in plain words, per the grill decision (payer holds gas).
 	async function payExternal(request: DecodedRequest, rowId: string | null) {
-		if (!externalClient || !externalAddress) {
+		const connector = connectors[0];
+		if (!connector || !externalAddress) {
 			setStage({ kind: "needsWallet" });
 			return;
 		}
 		setStage({ kind: "submitting" });
 		try {
-			const receipt = await payRequest(
-				externalClient as WalletClient,
-				externalAddress,
-				request,
-			);
+			// The wallet opens on whatever chain it was last on; a mainnet
+			// session sends USDC to a Monad address or viem refuses the
+			// mismatch. Pin the chain, then hand viem a fresh client bound to
+			// Monad testnet: the connector's cached client still points at the
+			// pre-switch chain.
+			if (externalChainId !== monadTestnet.id) {
+				await switchChainAsync({ chainId: monadTestnet.id });
+			}
+			const provider = (await connector.getProvider()) as EIP1193Provider;
+			const client = createWalletClient({
+				account: externalAddress,
+				chain: monadTestnet,
+				transport: custom(provider),
+			});
+			const receipt = await payRequest(client, externalAddress, request);
 			setStage({ kind: "confirming", hash: receipt.hash });
 			markNonceUsed(request.nonce);
 			saveReceipt(request.nonce, receipt);
@@ -252,11 +263,22 @@ export function PayRequest({
 			setStage({ kind: "paid", receipt });
 		} catch (err) {
 			const message = err instanceof Error ? err.message : String(err);
+			// Wallet rejections carry EIP-1193 code 4001; narrow before reading.
+			const code =
+				err && typeof err === "object" && "code" in err
+					? (err as { code: unknown }).code
+					: undefined;
+			const declined = code === 4001 || /user rejected|user denied/i.test(message);
 			setStage({
 				kind: "failed",
-				reason: /insufficient|balance/i.test(message)
-					? "Your wallet needs testnet MON for gas. Get some from the Monad faucet, then try again."
-					: "That didn't go through. Your money hasn't moved. Try again.",
+				reason:
+					declined
+						? "You declined the payment in your wallet. Nothing moved. Try again when you're ready."
+						: /insufficient funds for gas|insufficient balance/i.test(message)
+							? "Your wallet needs testnet MON for gas. Get some from the Monad faucet, then try again."
+							: /insufficient allowance|ERC20.*insufficient/i.test(message)
+								? "Your wallet doesn't hold enough testnet USDC for this amount."
+								: "That didn't go through. Your money hasn't moved. Try again.",
 				request,
 			});
 		}

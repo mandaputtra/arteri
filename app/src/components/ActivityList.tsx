@@ -136,17 +136,17 @@ export function ActivityList({ address }: { address: `0x${string}` }) {
 
 	useEffect(() => {
 		let cancelled = false;
-		// The database is the requester's own history: every link they minted
-		// and whether it is paid. The chain scan below is what they received.
-		// Either source failing leaves the other on screen.
-		fetchHistory(address).then((found) => {
-			if (!cancelled && found) setRequests(found.requests);
-		});
 		let timer: ReturnType<typeof setTimeout>;
 
 		async function tick() {
 			setScanning(true);
 			try {
+				// The database is the requester's own history. Polled, not
+				// one-shot: a link minted after this component mounted must
+				// appear without a page reload.
+				const found = await fetchHistory(address);
+				if (cancelled) return;
+				if (found) setRequests(found.requests);
 				const { entries: fresh } = await scanIncoming(address);
 				if (cancelled) return;
 				// Merge, never replace: the stored list is what survives a reload.

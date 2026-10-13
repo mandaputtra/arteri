@@ -1,11 +1,12 @@
 import { ArrowUpRight, Copy, Link } from "@phosphor-icons/react";
-import { useWallets } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { useState } from "react";
 import { createWalletClient, custom } from "viem";
 import { monadTestnet } from "viem/chains";
 import { saveNote } from "../lib/activity";
 import { parseAmount } from "../lib/amount";
 import { fileRequest } from "../lib/api";
+import { privyWalletAddress } from "../lib/privy-user";
 import { buildRequest, encodeLink, signRequest } from "../lib/request";
 import { USDC_TESTNET } from "../lib/wallet";
 import { FormButton, FormField, FormInput } from "./FormControls";
@@ -57,6 +58,7 @@ export function CreateRequest({
 	recipient: `0x${string}`;
 	requesterName: string;
 }) {
+	const { ready, authenticated, user } = usePrivy();
 	const { wallets } = useWallets();
 	const [amount, setAmount] = useState("");
 	const [description, setDescription] = useState("");
@@ -71,8 +73,14 @@ export function CreateRequest({
 			setError(parsed.reason);
 			return;
 		}
-		const wallet = wallets?.[0];
-		if (!wallet) {
+		// The signed intent's signer must equal the recipient the dashboard
+		// shows, or every payer is refused with "doesn't match what your client
+		// signed". A Privy user may also have linked external wallets
+		// (MetaMask et al); picking wallets[0] there signs from the wrong
+		// account. The embedded wallet is the only correct signer.
+		const wallet = wallets?.find((w) => w.walletClientType === "privy");
+		const embeddedAddress = user ? privyWalletAddress(user) : null;
+		if (!wallet || !embeddedAddress || !ready || !authenticated) {
 			setError("Couldn't reach your wallet. Try again.");
 			return;
 		}
@@ -81,7 +89,7 @@ export function CreateRequest({
 		setBusy(true);
 		try {
 			const request = buildRequest(
-				recipient,
+				embeddedAddress,
 				USDC_TESTNET,
 				parsed.baseUnits,
 				description.trim(),
@@ -93,10 +101,9 @@ export function CreateRequest({
 				chain: monadTestnet,
 				transport: custom(await wallet.getEthereumProvider()),
 			});
-			// Privy types its address as string; the trust boundary already checked
 			const signature = await signRequest(
 				client,
-				wallet.address as `0x${string}`,
+				embeddedAddress,
 				request,
 			);
 			// The description is unsigned prose that never reaches the chain. Saving
