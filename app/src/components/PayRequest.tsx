@@ -79,6 +79,14 @@ function shortAddress(address: string): string {
 	return `${address.slice(0, 6)}…${address.slice(-4)}`;
 }
 
+// MetaMask app link (universal link): opens this page inside the wallet's own
+// browser, where the injection exists. Falls back to the store when the app
+// is not installed, which is why the URL form matters over the scheme.
+function metaMaskDeepLink(): string {
+	const here = `${window.location.host}${window.location.pathname}`;
+	return `https://metamask.app.link/dapp/${here}`;
+}
+
 export function PayRequest({
 	slug,
 	description,
@@ -94,6 +102,12 @@ export function PayRequest({
 	const { address: externalAddress, chainId: externalChainId } = useAccount();
 	const { connect, connectors, isPending: externalConnecting } = useConnect();
 	const { switchChainAsync } = useSwitchChain();
+	// Desktop browsers inject window.ethereum (extension). Mobile browsers do
+	// not, except inside the wallet app's own browser.
+	const hasInjectedWallet =
+		typeof window !== "undefined" && "ethereum" in window;
+	const isMobileBrowser =
+		typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 	const [stage, setStage] = useState<Stage>({ kind: "checking" });
 	// Card leg (ADR-0002). Kept separate from `stage` because it can run while
 	// signed out: a card payer never gets a wallet at all.
@@ -505,7 +519,7 @@ export function PayRequest({
 							>
 								{`Pay from ${shortAddress(externalAddress)}`}
 							</button>
-						) : (
+						) : hasInjectedWallet ? (
 							<button
 								type="button"
 								className={`${CTA("violet")} mt-2`}
@@ -519,6 +533,24 @@ export function PayRequest({
 								{externalConnecting
 									? "Connecting…"
 									: "Pay with your wallet"}
+							</button>
+						) : isMobileBrowser ? (
+							// Mobile browsers never inject a wallet except inside
+							// the wallet app's own browser, so connect() fails
+							// silently here. Deep link into the wallet app instead.
+							<a
+								className={`${CTA("violet")} mt-2`}
+								href={metaMaskDeepLink()}
+							>
+								Open in your wallet app to pay
+							</a>
+						) : (
+							<button
+								type="button"
+								className={`${CTA("violet")} mt-2`}
+								onClick={() => setStage({ kind: "needsWallet" })}
+							>
+								Pay with your wallet
 							</button>
 						)}
 					</>
